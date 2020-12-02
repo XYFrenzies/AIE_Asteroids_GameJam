@@ -1,2 +1,8 @@
-﻿  main.cpp
-  Asteroids.vcxproj -> C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\Debug\Asteroids.exe
+﻿  Bullets.cpp
+C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\Bullets.cpp(17,67): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\Bullets.cpp(17,37): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\Bullets.cpp(17,25): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\Bullets.cpp(17,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\Bullets.cpp(24,27): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\Bullets.cpp(24,18): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Asteroids.vcxproj -> C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\bin\Win32\Debug\Asteroids.exe
