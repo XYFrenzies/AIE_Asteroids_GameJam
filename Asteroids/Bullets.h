@@ -16,5 +16,6 @@ protected:
 	
 private:
 	Application* m_app;
+	float m_bulletSpeed = 10;
 };
 

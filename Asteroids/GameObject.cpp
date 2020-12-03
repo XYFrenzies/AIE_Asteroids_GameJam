@@ -27,6 +27,11 @@ const Vector2& GameObject::GetFaceRotation() const
 	return m_facingDir;
 }
 
+const float& GameObject::GetRadius() const
+{
+	return m_radius;
+}
+
 void GameObject::SetFaceRotation(const Vector2& dir)
 {
 	m_facingDir = dir;
@@ -35,5 +40,10 @@ void GameObject::SetFaceRotation(const Vector2& dir)
 void GameObject::SetPosition(const Vector2& pos)
 {
 	m_pos = pos;
+}
+
+void GameObject::SetRadius(const float& rad)
+{
+	m_radius = rad;
 }
 
