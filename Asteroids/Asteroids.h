@@ -14,5 +14,6 @@ private:
 	Texture2D asteroidText;
 	Application* m_app;
 	float m_asteroidSpeed;
+	bool isOutOfSpace = false;
 };
 

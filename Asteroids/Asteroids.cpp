@@ -26,6 +26,24 @@ void Asteroids::Draw()
 
 void Asteroids::Update(float dt)
 {
+	if (isOutOfSpace == true)//This is to have the asteroids wrap around the screen.
+	{
+		if (m_pos.x + GetRadius() >= GetScreenWidth())
+			m_pos.x = GetRadius();
+		if (m_pos.x - GetRadius() <= 0)
+			m_pos.x = GetScreenWidth() - GetRadius();
+		if (m_pos.y + GetRadius() >= GetScreenHeight())
+			m_pos.y = GetRadius();
+		if (m_pos.y - GetRadius() <= 0)
+			m_pos.y = GetScreenHeight() - GetRadius();
+	}
+	else if (m_pos.x + GetRadius() >= 50
+		&& m_pos.x - GetRadius() <= GetScreenWidth() - 50
+		&& m_pos.y + GetRadius() >= 50
+		&& m_pos.y - GetRadius() <= GetScreenHeight() - 50)
+	{
+		isOutOfSpace = true;
+	}
 	m_pos.x += GetFaceRotation().x * m_asteroidSpeed;
 	m_pos.y += GetFaceRotation().y * m_asteroidSpeed;
 }

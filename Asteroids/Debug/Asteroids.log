@@ -121,15 +121,4 @@ C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\Raygui\src\raygui.h(334
 C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\Raygui\src\raygui.h(3340,26): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\Raygui\src\raygui.h(3355,107): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\Raygui\src\raygui.h(3355,74): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Asteroids.cpp
-  Bullets.cpp
-C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\Bullets.cpp(26,27): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\Bullets.cpp(26,18): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  Player.cpp
-C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\Player.cpp(65,32): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
-C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\Player.cpp(65,32): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\Player.cpp(65,45): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
-C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\Player.cpp(65,45): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  mainAsteroids.cpp
-  Generating Code...
   Asteroids.vcxproj -> C:\Users\s172834\Desktop\AIE_Asteroids_GameJam\Asteroids\bin\Win32\Debug\Asteroids.exe

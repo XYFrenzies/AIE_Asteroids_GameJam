@@ -43,8 +43,8 @@ void Player::Update(float dt)
 		m_pos.x = GetScreenWidth() - GetRadius();
 	if (m_pos.x - GetRadius() < 0)
 		m_pos.x = GetRadius();
-	if (m_pos.y + GetRadius() > GetScreenWidth())
-		m_pos.y = GetScreenWidth() - GetRadius();
+	if (m_pos.y + GetRadius() > GetScreenHeight())
+		m_pos.y = GetScreenHeight() - GetRadius();
 	if (m_pos.y - GetRadius() < 0)
 		m_pos.y = GetRadius();
 

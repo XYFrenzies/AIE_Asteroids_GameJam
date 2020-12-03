@@ -49,27 +49,54 @@ void Application::Update(float dt)
 	}
 	if (countTime > spawnTimer)
 	{
-		Vector2 newRandLoc = { (float)GetRandomValue(100, GetScreenWidth() - 100), (float)GetRandomValue(100, GetScreenHeight() - 100) };//Position to travel to.
+		Vector2 newRandLoc = { (float)GetRandomValue(300, GetScreenWidth() - 300), (float)GetRandomValue(300, GetScreenHeight() - 300) };//Position to travel to.
 		Asteroids* newAsteroid = new Asteroids(this);
 		newAsteroid->SetPosition(RandomNumberGenerator());
 		newAsteroid->SetFaceRotation(Vector2Normalize({ newRandLoc.x - RandomNumberGenerator().x, newRandLoc.y - RandomNumberGenerator().y }));
+		newAsteroid->SetRadius(40);
 		m_asteroids.push_back(newAsteroid);
 		countTime = 0;
 	}
 	else
 		countTime += 1;
 
-	//for (auto asteroid : m_asteroids)
-	//    asteroid->Update(dt);
+	std::list<Asteroids*> asteroidsToDelete;
+	std::list<Bullets*> bulletsToDelete;
 
+	for (auto bullets : m_bullets)
+	{
+		if (bullets->GetPosition().x + bullets->GetRadius() > GetScreenWidth())
+			bulletsToDelete.push_back(bullets);
+		if (bullets->GetPosition().x - bullets->GetRadius() < 0)
+			bulletsToDelete.push_back(bullets);
+		if (bullets->GetPosition().y + bullets->GetRadius() > GetScreenHeight())
+			bulletsToDelete.push_back(bullets);
+		if (bullets->GetPosition().y - bullets->GetRadius() < 0)
+			bulletsToDelete.push_back(bullets);
+		for (auto asteroids : m_asteroids)
+		{
+			if (asteroids->GetPosition().x + asteroids->GetRadius() > bullets->GetPosition().x
+				&& asteroids->GetPosition().x < bullets->GetPosition().x + asteroids->GetRadius() + bullets->GetRadius()
+				&& asteroids->GetPosition().y + asteroids->GetRadius() > bullets->GetPosition().y
+				&& asteroids->GetPosition().y < bullets->GetPosition().y + asteroids->GetRadius() + bullets->GetRadius())
+			{
+				asteroidsToDelete.push_back(asteroids);
+				bulletsToDelete.push_back(bullets);
 
-	for (auto bullet : m_bullets)//In this for loop, do a collision check!
-		bullet->Update(dt);
+				break;
+			}
+		}
+	}
+	for (auto bulletToDelete : bulletsToDelete)
+		m_bullets.remove(bulletToDelete);
 
-	for (auto asteroid : m_asteroids)
-		asteroid->Update(dt);
+	for (auto asteroidToDelete : asteroidsToDelete)
+		m_asteroids.remove(asteroidToDelete);
 
-
+	for (auto bullets : m_bullets)
+		bullets->Update(dt);
+	for (auto asteroids : m_asteroids)
+		asteroids->Update(dt);
 }
 Vector2 Application::RandomNumberGenerator()
 {
