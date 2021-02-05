@@ -5,7 +5,7 @@ Asteroids::Asteroids(Application* app)
 	m_app = app;
 	asteroidText = LoadTexture("./assets/asteroid.png");
 	randomLoc = { (float)GetRandomValue(10, GetScreenWidth() - 10), (float)GetRandomValue(10, GetScreenHeight() - 10) };
-	m_asteroidSpeed = (float)GetRandomValue(1, 6);
+	m_asteroidSpeed = (float)GetRandomValue(4, 6);
 }
 
 Asteroids::~Asteroids()
@@ -37,10 +37,10 @@ void Asteroids::Update(float dt)
 		if (m_pos.y - GetRadius() <= 0)
 			m_pos.y = GetScreenHeight() - GetRadius();
 	}
-	else if (m_pos.x + GetRadius() >= 50
-		&& m_pos.x - GetRadius() <= GetScreenWidth() - 50
-		&& m_pos.y + GetRadius() >= 50
-		&& m_pos.y - GetRadius() <= GetScreenHeight() - 50)
+	else if (m_pos.x + GetRadius() >= 200
+		&& m_pos.x - GetRadius() <= GetScreenWidth() - 200
+		&& m_pos.y + GetRadius() >= 100
+		&& m_pos.y - GetRadius() <= GetScreenHeight() - 100)
 	{
 		isOutOfSpace = true;
 	}

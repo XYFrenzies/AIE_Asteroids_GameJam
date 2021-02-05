@@ -25,11 +25,18 @@ protected:
 private:
 	int m_screenWidth;
 	int m_screenHeight;
+	int m_score = 0;
 	float countTime = 0;
-	int spawnTimer = 10;
+	float twHeart;
+	float thHeart;
+	int spawnTimer = 2;
+	int m_lives;
+	float xPosHeart;
 	Player* m_player;
 	std::list<Bullets*> m_bullets;
 	std::list<Asteroids*> m_asteroids;
+	Texture2D m_heartTexture;
+	bool restart = false;
 
 };
 

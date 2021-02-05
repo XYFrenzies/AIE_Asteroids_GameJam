@@ -3,7 +3,8 @@
 #include <ctime>
 #define RAYGUI_IMPLEMENTATION
 #define RAYGUI_SUPPORT_ICONS
-#include "raygui.h"
+#include "StartMenu.h"
+#include "EndGameMenu.h"
 
 Application::Application() : m_screenWidth(), m_screenHeight()
 {
@@ -17,24 +18,56 @@ void Application::Startup()
 {
 	m_screenWidth = 1800;
 	m_screenHeight = 1000;
-
 	InitWindow(m_screenWidth, m_screenHeight, "Asteroids Game");
 	SetTargetFPS(60);
 }
 
 void Application::Run()
 {
-	// Main game loop
-	Load();
-	while (!WindowShouldClose())    // Detect window close button or ESC key
+	while (!WindowShouldClose())
 	{
-		float dt = GetFrameTime();
-		if (dt > 1.0f / 12.0f)
-			dt = 1.0f / 12.0f;
-		Update(dt);
-		Draw();
+		// Main game loop
+		StartMenu begin;
+		while (begin.isStarting() == false && !WindowShouldClose())
+		{
+			float dt = GetFrameTime();
+			if (dt > 1.0f / 12.0f)
+				dt = 1.0f / 12.0f;
+			begin.Update(dt);
+			begin.Draw();
+		}
+		if (begin.isStarting() == true || restart == true)
+		{
+			restart = false;
+			Load();
+			while (!WindowShouldClose() && m_lives > 0)    // Detect window close button or ESC key
+			{
+				float dt = GetFrameTime();
+				if (dt > 1.0f / 12.0f)
+					dt = 1.0f / 12.0f;
+				Update(dt);
+				Draw();
+			}
+			Unload();
+		}
+		if (m_lives <= 0)
+		{
+			EndGameMenu endMenu;
+			while (!WindowShouldClose() && endMenu.isRestarting() != true)
+			{
+				float dt = GetFrameTime();
+				if (dt > 1.0f / 12.0f)
+					dt = 1.0f / 12.0f;
+				endMenu.retreiveScore(m_score);
+				endMenu.Draw();
+				endMenu.Update(dt);
+			}
+			m_lives = 3;
+			m_score = 0;
+			restart = true;
+		}
 	}
-	Unload();
+
 }
 
 void Application::Update(float dt)
@@ -49,7 +82,7 @@ void Application::Update(float dt)
 	}
 	if (countTime > spawnTimer)
 	{
-		Vector2 newRandLoc = { (float)GetRandomValue(300, GetScreenWidth() - 300), (float)GetRandomValue(300, GetScreenHeight() - 300) };//Position to travel to.
+		Vector2 newRandLoc = { (float)GetRandomValue(500, GetScreenWidth() - 500), (float)GetRandomValue(300, GetScreenHeight() - 300) };//Position to travel to.
 		Asteroids* newAsteroid = new Asteroids(this);
 		newAsteroid->SetPosition(RandomNumberGenerator());
 		newAsteroid->SetFaceRotation(Vector2Normalize({ newRandLoc.x - RandomNumberGenerator().x, newRandLoc.y - RandomNumberGenerator().y }));
@@ -62,7 +95,18 @@ void Application::Update(float dt)
 
 	std::list<Asteroids*> asteroidsToDelete;
 	std::list<Bullets*> bulletsToDelete;
-
+	//This is to decrease the live of the player, it also destroys the asteroid as well for now
+	for (auto asteroids : m_asteroids)
+	{
+		if (asteroids->GetPosition().x + asteroids->GetRadius() > m_player->GetPosition().x
+			&& asteroids->GetPosition().x < m_player->GetPosition().x + asteroids->GetRadius() + m_player->GetRadius()
+			&& asteroids->GetPosition().y + asteroids->GetRadius() > m_player->GetPosition().y
+			&& asteroids->GetPosition().y < m_player->GetPosition().y + asteroids->GetRadius() + m_player->GetRadius())
+		{
+			m_lives--;
+			asteroidsToDelete.push_back(asteroids);
+		}
+	}
 	for (auto bullets : m_bullets)
 	{
 		if (bullets->GetPosition().x + bullets->GetRadius() > GetScreenWidth())
@@ -82,7 +126,7 @@ void Application::Update(float dt)
 			{
 				asteroidsToDelete.push_back(asteroids);
 				bulletsToDelete.push_back(bullets);
-
+				m_score += 10;
 				break;
 			}
 		}
@@ -124,22 +168,37 @@ Vector2 Application::RandomNumberGenerator()
 void Application::Draw()
 {
 	BeginDrawing();
-
 	ClearBackground(BLACK);
 	for (auto bullet : m_bullets)
 		bullet->Draw();
 	m_player->Draw();
 	for (auto asteroid : m_asteroids)
 		asteroid->Draw();
+	DrawText(FormatText("Score: %i", m_score), 10, 10, 50, RAYWHITE);//Creates the text for the score.
+	DrawText("Lives:", 10, 70, 50, RAYWHITE);
+	xPosHeart = 220;
+
+	for (size_t i = 0; i < m_lives; i++)
+	{
+		DrawTexturePro(m_heartTexture, { 0, 0, (float)m_heartTexture.width, (float)m_heartTexture.height },
+			{ xPosHeart, 95,  twHeart,  thHeart }, { twHeart * 0.5f, thHeart * 0.5f }, 0, WHITE);
+		xPosHeart += 100;
+	}
+
+
 	EndDrawing();
 }
 
 void Application::Load()
 {
+	m_heartTexture = LoadTexture("./assets/heart.png");
+	twHeart = (float)m_heartTexture.width / 35;//Determining the heart size in the width
+	thHeart = (float)m_heartTexture.height / 35;//Determining the heart size in the height;
 	m_player = new Player(this);
 	m_player->SetPosition({ m_screenWidth * 0.25f, m_screenHeight * 0.25f });
-
+	m_player->SetLives(3);
 	m_player->SetRadius(40);
+	m_lives = GetPlayer()->GetLives();
 }
 
 void Application::Unload()
@@ -149,8 +208,11 @@ void Application::Unload()
 
 	for (auto bullet : m_bullets)
 		delete bullet;
-
+	for (auto asteroid : m_asteroids)
+		delete asteroid;
 	m_bullets.clear();
+	m_asteroids.clear();
+	
 }
 Player* Application::GetPlayer()//Gets the values of player
 {

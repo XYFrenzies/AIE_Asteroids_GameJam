@@ -1,0 +1,15 @@
+﻿  Application.cpp
+  StartMenu.cpp
+D:\AIE Work\AIE_Asteroids_GameJam\Asteroids\StartMenu.cpp(28,41): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\AIE Work\AIE_Asteroids_GameJam\Asteroids\StartMenu.cpp(39,32): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+D:\AIE Work\AIE_Asteroids_GameJam\Asteroids\StartMenu.cpp(39,32): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\AIE Work\AIE_Asteroids_GameJam\Asteroids\StartMenu.cpp(39,45): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+D:\AIE Work\AIE_Asteroids_GameJam\Asteroids\StartMenu.cpp(39,45): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+raylib.lib(core.obj) : warning LNK4099: PDB 'raylib.pdb' was not found with 'raylib.lib(core.obj)' or at 'D:\AIE Work\AIE_Asteroids_GameJam\Asteroids\bin\x64\Debug\raylib.pdb'; linking object as if no debug info
+raylib.lib(rglfw.obj) : warning LNK4099: PDB 'raylib.pdb' was not found with 'raylib.lib(rglfw.obj)' or at 'D:\AIE Work\AIE_Asteroids_GameJam\Asteroids\bin\x64\Debug\raylib.pdb'; linking object as if no debug info
+raylib.lib(shapes.obj) : warning LNK4099: PDB 'raylib.pdb' was not found with 'raylib.lib(shapes.obj)' or at 'D:\AIE Work\AIE_Asteroids_GameJam\Asteroids\bin\x64\Debug\raylib.pdb'; linking object as if no debug info
+raylib.lib(text.obj) : warning LNK4099: PDB 'raylib.pdb' was not found with 'raylib.lib(text.obj)' or at 'D:\AIE Work\AIE_Asteroids_GameJam\Asteroids\bin\x64\Debug\raylib.pdb'; linking object as if no debug info
+raylib.lib(textures.obj) : warning LNK4099: PDB 'raylib.pdb' was not found with 'raylib.lib(textures.obj)' or at 'D:\AIE Work\AIE_Asteroids_GameJam\Asteroids\bin\x64\Debug\raylib.pdb'; linking object as if no debug info
+raylib.lib(utils.obj) : warning LNK4099: PDB 'raylib.pdb' was not found with 'raylib.lib(utils.obj)' or at 'D:\AIE Work\AIE_Asteroids_GameJam\Asteroids\bin\x64\Debug\raylib.pdb'; linking object as if no debug info
+  Asteroids.vcxproj -> D:\AIE Work\AIE_Asteroids_GameJam\Asteroids\bin\x64\Debug\Asteroids.exe

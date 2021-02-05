@@ -3,8 +3,7 @@
 Player::Player(Application* app)
 {
 	m_app = app;
-	m_playerTexture = LoadTexture("./assets/AsteroidsShip.png");
-
+	m_playerTexture = LoadTexture("./assets/AsteroidsShip.png");//Player texture
 }
 
 
